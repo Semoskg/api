@@ -23,7 +23,50 @@
             .then(respone => respone.json())
             .then(data => {
                 data.recipes.forEach(recipe => {
+                    const card = document.createElement('div');
+                    card.className = 'col-md-4 mb-4 border rounded shadow-sm';
 
+                    const cardbody = document.createElement('div');
+                    cardbody.className = 'card-body';
+                    const title = document.createElement('h5');
+                    title.className = 'card-title';
+                    title.innerHTML = recipe.name;
+                    cardbody.appendChild(title);
+                    const imgfood = document.createElement('img');
+                    imgfood.src = recipe.image;
+
+                    imgfood.className = 'card-img-top';
+
+                    const btn = document.createElement('button');
+                    btn.className = 'btn btn-primary';
+                    btn.innerHTML = 'View Recipe';
+
+                    btn.addEventListener('click', () => {
+                        if (recipeSection.style.display === 'none') {
+                            recipeSection.style.display = 'block';
+                            btn.innerHTML = 'Hide Recipe';
+                        } else {
+                            recipeSection.style.display = 'none';
+                            0
+                            btn.innerHTML = 'View Recipe';
+                        }
+                    });
+
+
+                    const recipeSection = document.createElement('div');
+                    recipeSection.className = 'recipe-section';
+                    recipeSection.style = 'display: none;';
+
+
+                    const recipeIngredients = document.createElement('p');
+                    recipeIngredients.innerHTML = 'Ingredients: ' + recipe.ingredients.join(', ');
+                    cardbody.appendChild(imgfood);
+                    recipeSection.appendChild(recipeIngredients);
+                    cardbody.appendChild(recipeSection);
+
+                    cardbody.appendChild(btn);
+                    card.appendChild(cardbody);
+                    document.getElementById('recipe-container').appendChild(card);
 
 
                 });
